@@ -21,33 +21,23 @@ const frameIn = [
         },
         component: _import('system/index'),
       },
-      // 演示页面
       {
-        path: 'page1',
-        name: 'page1',
+        path: 'task',
+        name: 'task',
         meta: {
-          title: '页面 1',
+          title: '任务管理',
           auth: true,
         },
-        component: _import('demo/page1'),
+        component: _import('emotion/task'),
       },
       {
-        path: 'page2',
-        name: 'page2',
+        path: 'task/:id',
+        name: 'taskDetail',
         meta: {
-          title: '页面 2',
+          title: '任务详情',
           auth: true,
         },
-        component: _import('demo/page2'),
-      },
-      {
-        path: 'page3',
-        name: 'page3',
-        meta: {
-          title: '页面 3',
-          auth: true,
-        },
-        component: _import('demo/page3'),
+        component: _import('emotion/task/detail'),
       },
       // 系统 前端日志
       {

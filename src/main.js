@@ -10,9 +10,12 @@ import store from '@/store/index'
 import router from './router'
 import { menuAside, menuHeader } from '@/menu'
 import { frameInRoutes } from '@/router/routes'
+import VCharts from 'v-charts'
 
 // 核心插件
 Vue.use(d2Admin)
+// VCharts
+Vue.use(VCharts)
 
 new Vue({
   router,
