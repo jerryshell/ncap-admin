@@ -3,16 +3,8 @@
     <div class="d2-page-cover__logo">
       <slot/>
     </div>
-    <p class="d2-page-cover__title">D2 Admin {{$version}}</p>
-    <p class="d2-page-cover__sub-title">优雅的中后台集成方案</p>
-    <p class="d2-page-cover__build-time">FINAL BUILD TIME {{$buildTime}}</p>
-    <slot name="footer"/>
-    <a href="https://github.com/d2-projects/d2-admin" target="blank">
-      <img
-        alt="Fork me on GitHub"
-        src="./image/darkblue@2x.png"
-        style="position: absolute; top: 0; right: 0; border: 0; width: 150px;">
-    </a>
+    <p class="d2-page-cover__title">负面新闻检测系统 {{$version}}</p>
+    <p class="d2-page-cover__sub-title">AI 赋能 - 舆论监管辅助系统解决方案</p>
   </div>
 </template>
 

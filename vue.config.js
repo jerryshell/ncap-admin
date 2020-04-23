@@ -22,7 +22,7 @@ cdnDependencies.forEach(pkg => { externals[pkg.name] = pkg.library })
 // 引入文件的 cdn 链接
 const cdn = {
   css: cdnDependencies.map(e => e.css).filter(e => e),
-  js: cdnDependencies.map(e => e.js).filter(e => e)
+  js: cdnDependencies.map(e => e.js).filter(e => e),
 }
 
 // 多页配置，默认未开启，如需要请参考 https://cli.vuejs.org/zh/config/#pages
@@ -38,15 +38,15 @@ module.exports = {
   lintOnSave: true,
   devServer: {
     publicPath, // 和 publicPath 保持一致
-    disableHostCheck: process.env.NODE_ENV === 'development' // 关闭 host check，方便使用 ngrok 之类的内网转发工具
+    disableHostCheck: process.env.NODE_ENV === 'development', // 关闭 host check，方便使用 ngrok 之类的内网转发工具
   },
   css: {
     loaderOptions: {
       // 设置 scss 公用变量文件
       sass: {
-        prependData: `@import '~@/assets/style/public.scss';`
-      }
-    }
+        prependData: `@import '~@/assets/style/public.scss';`,
+      },
+    },
   },
   pages,
   configureWebpack: config => {
@@ -60,8 +60,8 @@ module.exports = {
           test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
           threshold: 10240,
           minRatio: 0.8,
-          deleteOriginalAssets: false
-        })
+          deleteOriginalAssets: false,
+        }),
       ]
     }
     return configNew
@@ -72,11 +72,17 @@ module.exports = {
      * 添加 CDN 参数到 htmlWebpackPlugin 配置中
      * 已适配多页
      */
-    const htmlPluginNames = chain(pages).keys().map(page => 'html-' + page).value()
-    const targetHtmlPluginNames = htmlPluginNames.length ? htmlPluginNames : ['html']
+    const htmlPluginNames = chain(pages)
+      .keys()
+      .map(page => 'html-' + page)
+      .value()
+    const targetHtmlPluginNames = htmlPluginNames.length
+      ? htmlPluginNames
+      : ['html']
     each(targetHtmlPluginNames, name => {
       config.plugin(name).tap(options => {
-        set(options, '[0].cdn', process.env.NODE_ENV === 'production' ? cdn : [])
+        set(options, '[0].cdn',
+          process.env.NODE_ENV === 'production' ? cdn : [])
         return options
       })
     })
@@ -95,25 +101,27 @@ module.exports = {
       .symlinks(true)
     config
       .plugin('theme-color-replacer')
-      .use(ThemeColorReplacer, [{
-        fileName: 'css/theme-colors.[contenthash:8].css',
-        matchColors: [
-          ...forElementUI.getElementUISeries(process.env.VUE_APP_ELEMENT_COLOR) // Element-ui主色系列
-        ],
-        externalCssFiles: [ './node_modules/element-ui/lib/theme-chalk/index.css' ], // optional, String or string array. Set external css files (such as cdn css) to extract colors.
-        changeSelector: forElementUI.changeSelector
-      }])
+      .use(ThemeColorReplacer, [
+        {
+          fileName: 'css/theme-colors.[contenthash:8].css',
+          matchColors: [
+            ...forElementUI.getElementUISeries(
+              process.env.VUE_APP_ELEMENT_COLOR), // Element-ui主色系列
+          ],
+          externalCssFiles: ['./node_modules/element-ui/lib/theme-chalk/index.css'], // optional, String or string array. Set external css files (such as cdn css) to extract colors.
+          changeSelector: forElementUI.changeSelector,
+        }])
     config
       // 开发环境 sourcemap 不包含列信息
       .when(process.env.NODE_ENV === 'development',
-        config => config.devtool('cheap-source-map')
+        config => config.devtool('cheap-source-map'),
       )
       // 预览环境构建 vue-loader 添加 filename
       .when(
         process.env.VUE_APP_SCOURCE_LINK === 'TRUE',
         config => VueFilenameInjector(config, {
-          propName: process.env.VUE_APP_SOURCE_VIEWER_PROP_NAME
-        })
+          propName: process.env.VUE_APP_SOURCE_VIEWER_PROP_NAME,
+        }),
       )
     // markdown
     config.module
@@ -132,7 +140,7 @@ module.exports = {
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')
       .options({
-        symbolId: 'd2-[name]'
+        symbolId: 'd2-[name]',
       })
       .end()
     // image exclude
@@ -169,7 +177,7 @@ module.exports = {
       locale: 'zh-chs',
       fallbackLocale: 'en',
       localeDir: 'locales',
-      enableInSFC: true
-    }
-  }
+      enableInSFC: true,
+    },
+  },
 }

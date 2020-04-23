@@ -6,11 +6,6 @@
     <div class="d2-layout-header-aside-content" flex="dir:top">
       <!-- 顶栏 -->
       <div :style="{ opacity: this.searchActive ? 0.5 : 1 }" class="d2-theme-header" flex flex-box="0">
-        <router-link :style="{width: asideCollapse ? asideWidthCollapse : asideWidth}" class="logo-group" flex-box="0"
-                     to="/index">
-          <img :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/icon-only.png`" v-if="asideCollapse">
-          <img :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/all.png`" v-else>
-        </router-link>
         <div @click="handleToggleAside" class="toggle-aside-btn" flex-box="0">
           <d2-icon name="bars"/>
         </div>
@@ -22,16 +17,14 @@
           <d2-header-log/>
           <d2-header-fullscreen/>
           <d2-header-theme/>
-          <d2-header-size/>
-          <d2-header-locales/>
-          <d2-header-color/>
           <d2-header-user/>
         </div>
       </div>
       <!-- 下面 主体 -->
       <div class="d2-theme-container" flex flex-box="1">
         <!-- 主体 侧边栏 -->
-        <div :style="{ width: asideCollapse ? asideWidthCollapse : asideWidth, opacity: this.searchActive ? 0.5 : 1 }" class="d2-theme-container-aside" flex-box="0"
+        <div :style="{ width: asideCollapse ? asideWidthCollapse : asideWidth, opacity: this.searchActive ? 0.5 : 1 }"
+             class="d2-theme-container-aside" flex-box="0"
              ref="aside">
           <d2-menu-side/>
         </div>

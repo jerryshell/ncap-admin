@@ -23,7 +23,8 @@
           class="page-login--content-main"
           flex="dir:top main:center cross:center">
           <!-- logo -->
-          <img class="page-login--logo" src="./image/logo@2x.png">
+          <!--          <img class="page-login&#45;&#45;logo" src="./image/logo@2x.png">-->
+          <h1>负面新闻检测系统</h1>
           <!-- form -->
           <div class="page-login--form">
             <el-card shadow="never">
@@ -49,16 +50,6 @@
                     <i class="fa fa-keyboard-o" slot="prepend"></i>
                   </el-input>
                 </el-form-item>
-                <el-form-item prop="code">
-                  <el-input
-                    placeholder="验证码"
-                    type="text"
-                    v-model="formLogin.code">
-                    <template slot="append">
-                      <img class="login-code" src="./image/login-code.png">
-                    </template>
-                  </el-input>
-                </el-form-item>
                 <el-button
                   @click="submit"
                   class="button-login"
@@ -68,40 +59,9 @@
                 </el-button>
               </el-form>
             </el-card>
-            <p
-              class="page-login--options"
-              flex="main:justify cross:center">
-              <span><d2-icon name="question-circle"/> 忘记密码</span>
-              <span>注册用户</span>
-            </p>
-            <!-- quick login -->
-            <el-button @click="dialogVisible = true" class="page-login--quick" size="default" type="info">
-              快速选择用户（测试功能）
-            </el-button>
           </div>
         </div>
         <div class="page-login--content-footer">
-          <p class="page-login--content-footer-locales">
-            <a
-              :key="language.value"
-              @click="onChangeLocale(language.value)"
-              v-for="language in $languages">
-              {{ language.label }}
-            </a>
-          </p>
-          <p class="page-login--content-footer-copyright">
-            Copyright
-            <d2-icon name="copyright"/>
-            2018 D2 Projects 开源组织出品
-            <a href="https://github.com/FairyEver">
-              @FairyEver
-            </a>
-          </p>
-          <p class="page-login--content-footer-options">
-            <a href="#">帮助</a>
-            <a href="#">隐私</a>
-            <a href="#">条款</a>
-          </p>
         </div>
       </div>
     </div>

@@ -108,6 +108,6 @@ export default {
       } else {
         this.$refs.component.$refs.body.scrollTop = top
       }
-    }
-  }
+    },
+  },
 }
