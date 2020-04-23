@@ -1,10 +1,10 @@
-import { mapState, mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 
 import hotkeys from 'hotkeys-js'
 
 export default {
   components: {
-    'd2-panel-search': () => import('../components/panel-search')
+    'd2-panel-search': () => import('../components/panel-search'),
   },
   mounted () {
     // 绑定搜索功能快捷键 [ 打开 ]
@@ -25,13 +25,13 @@ export default {
   computed: {
     ...mapState('d2admin', {
       searchActive: state => state.search.active,
-      searchHotkey: state => state.search.hotkey
-    })
+      searchHotkey: state => state.search.hotkey,
+    }),
   },
   methods: {
     ...mapMutations({
       searchToggle: 'd2admin/search/toggle',
-      searchSet: 'd2admin/search/set'
+      searchSet: 'd2admin/search/set',
     }),
     /**
      * 接收点击搜索按钮
@@ -61,6 +61,6 @@ export default {
       if (this.searchActive) {
         this.searchSet(false)
       }
-    }
-  }
+    },
+  },
 }

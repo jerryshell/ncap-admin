@@ -1,34 +1,36 @@
 <template>
   <div
-    v-if="show"
-    class="d2-source"
     :class="{ 'd2-source--active': isActive }"
-    @click="handleClick">
-    <d2-icon name="code"/> 本页源码
+    @click="handleClick"
+    class="d2-source"
+    v-if="show">
+    <d2-icon name="code"/>
+    本页源码
   </div>
 </template>
 
 <script>
-import { last, get } from 'lodash'
+import { get, last } from 'lodash'
+
 export default {
   data () {
     return {
       isActive: false,
-      path: ''
+      path: '',
     }
   },
   computed: {
     show () {
       return process.env.VUE_APP_SCOURCE_LINK === 'TRUE'
-    }
+    },
   },
   watch: {
     $route: {
       handler (to) {
         this.path = get(last(to.matched), 'components.default.__source')
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   mounted () {
     // 一秒后显示按钮
@@ -40,8 +42,8 @@ export default {
     // 点击按钮的时候跳转到源代码
     handleClick () {
       this.$open(`${process.env.VUE_APP_REPO}/blob/master/${this.path}`)
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -68,9 +70,11 @@ export default {
   color: #FFF;
   transition: all .3s;
   @extend %unable-select;
+
   &.d2-source--active {
     opacity: 1;
   }
+
   &:hover {
     right: - $borderRadius;
     background-color: rgba(#000, .9);

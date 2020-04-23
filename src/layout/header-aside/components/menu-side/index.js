@@ -6,34 +6,46 @@ import BScroll from 'better-scroll'
 export default {
   name: 'd2-layout-header-aside-menu-side',
   mixins: [
-    menuMixin
+    menuMixin,
   ],
   render (createElement) {
-    return createElement('div', { attrs: { class: 'd2-layout-header-aside-menu-side' } }, [
-      createElement('el-menu', {
-        props: { collapse: this.asideCollapse, uniqueOpened: true, defaultActive: this.$route.fullPath },
-        ref: 'menu',
-        on: { select: this.handleMenuSelect }
-      }, this.aside.map(menu => (menu.children === undefined ? elMenuItem : elSubmenu).call(this, createElement, menu))),
-      ...this.aside.length === 0 && !this.asideCollapse ? [
-        createElement('div', { attrs: { class: 'd2-layout-header-aside-menu-empty', flex: 'dir:top main:center cross:center' } }, [
-          createElement('d2-icon', { props: { name: 'inbox' } }),
-          createElement('span', {}, '没有侧栏菜单')
-        ])
-      ] : []
-    ])
+    return createElement('div',
+      { attrs: { class: 'd2-layout-header-aside-menu-side' } }, [
+        createElement('el-menu', {
+          props: {
+            collapse: this.asideCollapse,
+            uniqueOpened: true,
+            defaultActive: this.$route.fullPath,
+          },
+          ref: 'menu',
+          on: { select: this.handleMenuSelect },
+        }, this.aside.map(
+          menu => (menu.children === undefined ? elMenuItem : elSubmenu).call(
+            this, createElement, menu))),
+        ...this.aside.length === 0 && !this.asideCollapse ? [
+          createElement('div', {
+            attrs: {
+              class: 'd2-layout-header-aside-menu-empty',
+              flex: 'dir:top main:center cross:center',
+            },
+          }, [
+            createElement('d2-icon', { props: { name: 'inbox' } }),
+            createElement('span', {}, '没有侧栏菜单'),
+          ]),
+        ] : [],
+      ])
   },
   data () {
     return {
       asideHeight: 300,
-      BS: null
+      BS: null,
     }
   },
   computed: {
     ...mapState('d2admin/menu', [
       'aside',
-      'asideCollapse'
-    ])
+      'asideCollapse',
+    ]),
   },
   watch: {
     // 折叠和展开菜单的时候销毁 better scroll
@@ -42,7 +54,7 @@ export default {
       setTimeout(() => {
         this.scrollInit()
       }, 500)
-    }
+    },
   },
   mounted () {
     this.scrollInit()
@@ -54,7 +66,7 @@ export default {
     scrollInit () {
       this.BS = new BScroll(this.$el, {
         mouseWheel: true,
-        click: true
+        click: true,
         // 如果你愿意可以打开显示滚动条
         // scrollbar: {
         //   fade: true,
@@ -70,6 +82,6 @@ export default {
         delete this.BS
         this.BS = null
       }
-    }
-  }
+    },
+  },
 }

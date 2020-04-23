@@ -2,7 +2,7 @@ export default {
   namespaced: true,
   state: {
     // 灰度
-    active: false
+    active: false,
   },
   mutations: {
     /**
@@ -19,6 +19,6 @@ export default {
      */
     set (state, active) {
       state.active = active
-    }
-  }
+    },
+  },
 }

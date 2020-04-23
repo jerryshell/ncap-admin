@@ -11,8 +11,8 @@ export default {
           type: 'danger',
           meta: {
             error,
-            instance
-          }
+            instance,
+          },
         })
         // 只在开发模式下打印 log
         if (process.env.NODE_ENV === 'development') {
@@ -26,5 +26,5 @@ export default {
         }
       })
     }
-  }
+  },
 }

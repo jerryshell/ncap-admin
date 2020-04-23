@@ -1,5 +1,5 @@
 <template>
-  <div class="d2-contextmenu" v-show="flag" :style="style">
+  <div :style="style" class="d2-contextmenu" v-show="flag">
     <slot/>
   </div>
 </template>
@@ -10,16 +10,16 @@ export default {
   props: {
     visible: {
       type: Boolean,
-      default: false
+      default: false,
     },
     x: {
       type: Number,
-      default: 0
+      default: 0,
     },
     y: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   computed: {
     flag: {
@@ -32,26 +32,26 @@ export default {
       },
       set (newVal) {
         this.$emit('update:visible', newVal)
-      }
+      },
     },
     style () {
       return {
         left: this.x + 'px',
         top: this.y + 'px',
-        display: this.visible ? 'block' : 'none '
+        display: this.visible ? 'block' : 'none ',
       }
-    }
+    },
   },
   methods: {
     watchContextmenu (event) {
       if (!this.$el.contains(event.target) || event.button !== 0) this.flag = false
       window.removeEventListener('mousedown', this.watchContextmenu)
-    }
+    },
   },
   mounted () {
     // 将菜单放置到body下
     document.querySelector('body').appendChild(this.$el)
-  }
+  },
 }
 </script>
 
@@ -63,6 +63,6 @@ export default {
   background: #FFF;
   border: 1px solid #cfd7e5;
   border-radius: 4px;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
 }
 </style>

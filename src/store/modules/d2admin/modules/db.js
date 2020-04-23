@@ -18,7 +18,7 @@ export default {
       dbName = 'database',
       path = '',
       value = '',
-      user = false
+      user = false,
     }) {
       dbSet({ dbName, path, value, user })
     },
@@ -35,7 +35,7 @@ export default {
       dbName = 'database',
       path = '',
       defaultValue = '',
-      user = false
+      user = false,
     }) {
       return dbGet({ dbName, path, defaultValue, user })
     },
@@ -45,11 +45,11 @@ export default {
      * @param {Object} payload user {Boolean} 是否区分用户
      */
     database (context, {
-      user = false
+      user = false,
     } = {}) {
       return getDatabase({
         user,
-        defaultValue: {}
+        defaultValue: {},
       })
     },
     /**
@@ -58,12 +58,12 @@ export default {
      * @param {Object} payload user {Boolean} 是否区分用户
      */
     databaseClear (context, {
-      user = false
+      user = false,
     } = {}) {
       return getDatabase({
         user,
         validator: () => false,
-        defaultValue: {}
+        defaultValue: {},
       })
     },
     /**
@@ -74,12 +74,12 @@ export default {
      */
     databasePage (context, {
       basis = 'fullPath',
-      user = false
+      user = false,
     } = {}) {
       return getDatabase({
         path: `$page.${router.app.$route[basis]}`,
         user,
-        defaultValue: {}
+        defaultValue: {},
       })
     },
     /**
@@ -90,13 +90,13 @@ export default {
      */
     databasePageClear (context, {
       basis = 'fullPath',
-      user = false
+      user = false,
     } = {}) {
       return getDatabase({
         path: `$page.${router.app.$route[basis]}`,
         user,
         validator: () => false,
-        defaultValue: {}
+        defaultValue: {},
       })
     },
     /**
@@ -109,13 +109,13 @@ export default {
     pageSet (context, {
       instance,
       basis = 'fullPath',
-      user = false
+      user = false,
     }) {
       return getDatabase({
         path: `$page.${router.app.$route[basis]}.$data`,
         user,
         validator: () => false,
-        defaultValue: cloneDeep(instance.$data)
+        defaultValue: cloneDeep(instance.$data),
       })
     },
     /**
@@ -128,12 +128,12 @@ export default {
     pageGet (context, {
       instance,
       basis = 'fullPath',
-      user = false
+      user = false,
     }) {
       return dbGet({
         path: `$page.${router.app.$route[basis]}.$data`,
         user,
-        defaultValue: cloneDeep(instance.$data)
+        defaultValue: cloneDeep(instance.$data),
       })
     },
     /**
@@ -144,14 +144,14 @@ export default {
      */
     pageClear (context, {
       basis = 'fullPath',
-      user = false
+      user = false,
     }) {
       return getDatabase({
         path: `$page.${router.app.$route[basis]}.$data`,
         user,
         validator: () => false,
-        defaultValue: {}
+        defaultValue: {},
       })
-    }
-  }
+    },
+  },
 }

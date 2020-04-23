@@ -9,7 +9,7 @@ const db = low(adapter)
 db
   .defaults({
     sys: {},
-    database: {}
+    database: {},
   })
   .write()
 
@@ -29,10 +29,12 @@ export function pathInit ({
   path = '',
   user = true,
   validator = () => true,
-  defaultValue = ''
+  defaultValue = '',
 }) {
   const uuid = util.cookies.get('uuid') || 'ghost-uuid'
-  const currentPath = `${dbName}.${user ? `user.${uuid}` : 'public'}${path ? `.${path}` : ''}`
+  const currentPath = `${dbName}.${user ? `user.${uuid}` : 'public'}${path
+    ? `.${path}`
+    : ''}`
   const value = db.get(currentPath).value()
   if (!(value !== undefined && validator(value))) {
     db
@@ -54,12 +56,12 @@ export function dbSet ({
   dbName = 'database',
   path = '',
   value = '',
-  user = false
+  user = false,
 }) {
   db.set(pathInit({
     dbName,
     path,
-    user
+    user,
   }), value).write()
 }
 
@@ -75,14 +77,14 @@ export function dbGet ({
   dbName = 'database',
   path = '',
   defaultValue = '',
-  user = false
+  user = false,
 }) {
   return new Promise(resolve => {
     resolve(cloneDeep(db.get(pathInit({
       dbName,
       path,
       user,
-      defaultValue
+      defaultValue,
     })).value()))
   })
 }
@@ -96,11 +98,11 @@ export function database ({
   path = '',
   user = false,
   validator = () => true,
-  defaultValue = ''
+  defaultValue = '',
 } = {}) {
   return new Promise(resolve => {
     resolve(db.get(pathInit({
-      dbName, path, user, validator, defaultValue
+      dbName, path, user, validator, defaultValue,
     })))
   })
 }

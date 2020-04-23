@@ -5,7 +5,7 @@ export default {
   namespaced: true,
   state: {
     // 尺寸
-    value: '' // medium small mini
+    value: '', // medium small mini
   },
   actions: {
     /**
@@ -50,7 +50,7 @@ export default {
           dbName: 'sys',
           path: 'size.value',
           value: state.value,
-          user: true
+          user: true,
         }, { root: true })
         // end
         resolve()
@@ -67,13 +67,13 @@ export default {
           dbName: 'sys',
           path: 'size.value',
           defaultValue: 'default',
-          user: true
+          user: true,
         }, { root: true })
         // 应用
         dispatch('apply')
         // end
         resolve()
       })
-    }
-  }
+    },
+  },
 }

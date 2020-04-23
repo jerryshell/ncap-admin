@@ -8,10 +8,10 @@ export default {
     // 快捷键
     hotkey: {
       open: setting.hotkey.search.open,
-      close: setting.hotkey.search.close
+      close: setting.hotkey.search.close,
     },
     // 所有可以搜索的页面
-    pool: []
+    pool: [],
   },
   mutations: {
     /**
@@ -39,17 +39,17 @@ export default {
       const push = function (menu, titlePrefix = []) {
         menu.forEach(m => {
           if (m.children) {
-            push(m.children, [ ...titlePrefix, m.title ])
+            push(m.children, [...titlePrefix, m.title])
           } else {
             pool.push({
               ...m,
-              fullTitle: [ ...titlePrefix, m.title ].join(' / ')
+              fullTitle: [...titlePrefix, m.title].join(' / '),
             })
           }
         })
       }
       push(menu)
       state.pool = pool
-    }
-  }
+    },
+  },
 }

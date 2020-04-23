@@ -11,7 +11,7 @@ export default {
     //   - type 非必须 类型 success | warning | info(默认) | danger
     //   - time 必须 日志记录时间
     //   - meta 非必须 其它携带信息
-    log: []
+    log: [],
   },
   getters: {
     /**
@@ -27,7 +27,7 @@ export default {
      */
     lengthError (state) {
       return state.log.filter(log => log.type === 'danger').length
-    }
+    },
   },
   actions: {
     /**
@@ -52,10 +52,10 @@ export default {
           // 当前地址
           url: get(window, 'location.href', ''),
           // 用户设置
-          ...meta
-        }
+          ...meta,
+        },
       })
-    }
+    },
   },
   mutations: {
     /**
@@ -73,6 +73,6 @@ export default {
     clean (state) {
       // store 赋值
       state.log = []
-    }
-  }
+    },
+  },
 }

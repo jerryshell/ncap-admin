@@ -1,12 +1,12 @@
 <template>
   <div class="d2-container-full">
-    <div v-if="$slots.header" class="d2-container-full__header" ref="header">
+    <div class="d2-container-full__header" ref="header" v-if="$slots.header">
       <slot name="header"/>
     </div>
     <div class="d2-container-full__body" ref="body">
       <slot/>
     </div>
-    <div v-if="$slots.footer" class="d2-container-full__footer" ref="footer">
+    <div class="d2-container-full__footer" ref="footer" v-if="$slots.footer">
       <slot name="footer"/>
     </div>
   </div>
@@ -14,10 +14,11 @@
 
 <script>
 import scroll from './mixins/normal'
+
 export default {
   name: 'd2-container-full',
   mixins: [
-    scroll
+    scroll,
   ],
   mounted () {
     // 增加滚动事件监听
@@ -26,6 +27,6 @@ export default {
   beforeDestroy () {
     // 移除滚动事件监听
     this.removeScrollListener()
-  }
+  },
 }
 </script>

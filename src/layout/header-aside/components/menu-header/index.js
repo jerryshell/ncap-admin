@@ -6,49 +6,63 @@ import { elMenuItem, elSubmenu } from '../libs/util.menu'
 export default {
   name: 'd2-layout-header-aside-menu-header',
   mixins: [
-    menuMixin
+    menuMixin,
   ],
   render (createElement) {
     return createElement('div', {
       attrs: { flex: 'cross:center' },
       class: { 'd2-theme-header-menu': true, 'is-scrollable': this.isScroll },
-      ref: 'page'
+      ref: 'page',
     }, [
       createElement('div', {
-        attrs: { class: 'd2-theme-header-menu__content', flex: '', 'flex-box': '1' },
-        ref: 'content'
+        attrs: {
+          class: 'd2-theme-header-menu__content',
+          flex: '',
+          'flex-box': '1',
+        },
+        ref: 'content',
       }, [
         createElement('div', {
           attrs: { class: 'd2-theme-header-menu__scroll', 'flex-box': '0' },
           style: { transform: `translateX(${this.currentTranslateX}px)` },
-          ref: 'scroll'
+          ref: 'scroll',
         }, [
           createElement('el-menu', {
             props: { mode: 'horizontal', defaultActive: this.active },
-            on: { select: this.handleMenuSelect }
-          }, this.header.map(menu => (menu.children === undefined ? elMenuItem : elSubmenu).call(this, createElement, menu)))
-        ])
+            on: { select: this.handleMenuSelect },
+          }, this.header.map(
+            menu => (menu.children === undefined ? elMenuItem : elSubmenu).call(
+              this, createElement, menu))),
+        ]),
       ]),
       ...this.isScroll ? [
         createElement('div', {
-          attrs: { class: 'd2-theme-header-menu__prev', flex: 'main:center cross:center', 'flex-box': '0' },
-          on: { click: () => this.scroll('left') }
+          attrs: {
+            class: 'd2-theme-header-menu__prev',
+            flex: 'main:center cross:center',
+            'flex-box': '0',
+          },
+          on: { click: () => this.scroll('left') },
         }, [
-          createElement('i', { attrs: { class: 'el-icon-arrow-left' } })
+          createElement('i', { attrs: { class: 'el-icon-arrow-left' } }),
         ]),
         createElement('div', {
-          attrs: { class: 'd2-theme-header-menu__next', flex: 'main:center cross:center', 'flex-box': '0' },
-          on: { click: () => this.scroll('right') }
+          attrs: {
+            class: 'd2-theme-header-menu__next',
+            flex: 'main:center cross:center',
+            'flex-box': '0',
+          },
+          on: { click: () => this.scroll('right') },
         }, [
-          createElement('i', { attrs: { class: 'el-icon-arrow-right' } })
-        ])
-      ] : []
+          createElement('i', { attrs: { class: 'el-icon-arrow-right' } }),
+        ]),
+      ] : [],
     ])
   },
   computed: {
     ...mapState('d2admin/menu', [
-      'header'
-    ])
+      'header',
+    ]),
   },
   data () {
     return {
@@ -57,7 +71,7 @@ export default {
       scrollWidth: 0,
       contentWidth: 0,
       currentTranslateX: 0,
-      throttledCheckScroll: null
+      throttledCheckScroll: null,
     }
   },
   watch: {
@@ -65,8 +79,8 @@ export default {
       handler (val) {
         this.active = val[val.length - 1].path
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   methods: {
     scroll (direction) {
@@ -75,7 +89,8 @@ export default {
         this.currentTranslateX = 0
       } else {
         // 向左滚动
-        if (this.contentWidth * 2 - this.currentTranslateX <= this.scrollWidth) {
+        if (this.contentWidth * 2 - this.currentTranslateX <=
+          this.scrollWidth) {
           this.currentTranslateX -= this.contentWidth
         } else {
           this.currentTranslateX = this.contentWidth - this.scrollWidth
@@ -115,7 +130,7 @@ export default {
           this.currentTranslateX = 0
         })
       }
-    }
+    },
   },
   mounted () {
     // 初始化判断
@@ -129,5 +144,5 @@ export default {
     // 取消监听
     window.removeEventListener('resize', this.throttledCheckScroll)
     window.removeEventListener('load', this.checkScroll)
-  }
+  },
 }

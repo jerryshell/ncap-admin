@@ -13,13 +13,13 @@ export default {
           // 为了方便使用
           // eg: this.$log.push('foo text')
           store.dispatch('d2admin/log/push', {
-            message: data
+            message: data,
           })
         } else if (typeof data === 'object') {
           // 如果传递来的数据是对象
           store.dispatch('d2admin/log/push', data)
         }
-      }
+      },
     }
-  }
+  },
 }

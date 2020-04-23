@@ -5,7 +5,7 @@ export default {
   namespaced: true,
   state: {
     // 是否开启页面过度动画
-    active: setting.transition.active
+    active: setting.transition.active,
   },
   actions: {
     /**
@@ -22,7 +22,7 @@ export default {
           dbName: 'sys',
           path: 'transition.active',
           value: state.active,
-          user: true
+          user: true,
         }, { root: true })
         // end
         resolve()
@@ -39,11 +39,11 @@ export default {
           dbName: 'sys',
           path: 'transition.active',
           defaultValue: setting.transition.active,
-          user: true
+          user: true,
         }, { root: true })
         // end
         resolve()
       })
-    }
-  }
+    },
+  },
 }

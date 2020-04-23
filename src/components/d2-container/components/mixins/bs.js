@@ -1,16 +1,17 @@
 import BScroll from 'better-scroll'
+
 export default {
   props: {
     // 滚动优化的选项
     betterScrollOptions: {
       type: Object,
       required: false,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data () {
     return {
-      BS: null
+      BS: null,
     }
   },
   mounted () {
@@ -27,13 +28,13 @@ export default {
         click: true,
         scrollbar: {
           fade: true,
-          interactive: false
-        }
+          interactive: false,
+        },
       }, this.betterScrollOptions))
       // 滚动时发出事件 并且统一返回的数据格式
       this.BS.on('scroll', ({ x, y }) => this.$emit('scroll', {
         x: -x,
-        y: -y
+        y: -y,
       }))
     },
     scrollDestroy () {
@@ -54,9 +55,9 @@ export default {
       if (this.BS) {
         this.$emit('scroll', {
           x: -this.BS.x,
-          y: -this.BS.y
+          y: -this.BS.y,
         })
       }
-    }
-  }
+    },
+  },
 }

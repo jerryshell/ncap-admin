@@ -4,7 +4,7 @@ export default {
   namespaced: true,
   state: {
     // 用户 UA
-    data: {}
+    data: {},
   },
   mutations: {
     /**
@@ -13,6 +13,6 @@ export default {
      */
     get (state) {
       state.data = new UaParser().getResult()
-    }
-  }
+    },
+  },
 }

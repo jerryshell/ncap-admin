@@ -1,19 +1,20 @@
 <template>
   <div class="panel-search" flex="dir:top">
-    <div class="panel-search__input-group" flex-box="0" flex="dir:top main:center cross:center" @click.self="handlePanelClick">
+    <div @click.self="handlePanelClick" class="panel-search__input-group" flex="dir:top main:center cross:center"
+         flex-box="0">
       <d2-icon-svg class="panel-search__logo" name="d2-admin-text"/>
       <el-autocomplete
-        class="panel-search__input"
-        ref="input"
-        v-model="searchText"
-        suffix-icon="el-icon-search"
-        placeholder="搜索页面"
+        :clearable="true"
         :fetch-suggestions="querySearch"
         :trigger-on-focus="false"
-        :clearable="true"
         @keydown.esc.native="handleEsc"
-        @select="handleSelect">
-        <d2-panel-search-item slot-scope="{ item }" :item="item"/>
+        @select="handleSelect"
+        class="panel-search__input"
+        placeholder="搜索页面"
+        ref="input"
+        suffix-icon="el-icon-search"
+        v-model="searchText">
+        <d2-panel-search-item :item="item" slot-scope="{ item }"/>
       </el-autocomplete>
       <div class="panel-search__tip">
         您可以使用快捷键
@@ -23,15 +24,15 @@
         关闭
       </div>
     </div>
-    <div v-if="resultsList.length > 0" class="panel-search__results-group" flex-box="1">
+    <div class="panel-search__results-group" flex-box="1" v-if="resultsList.length > 0">
       <el-card shadow="never">
         <div class="panel-search__results-group-inner">
           <d2-panel-search-item
-            v-for="(item, index) in resultsList"
-            :key="index"
-            :item="item"
             :hover-mode="true"
-            @click.native="handleResultsGroupItemClick(item.path)"/>
+            :item="item"
+            :key="index"
+            @click.native="handleResultsGroupItemClick(item.path)"
+            v-for="(item, index) in resultsList"/>
         </div>
       </el-card>
     </div>
@@ -42,31 +43,32 @@
 import Fuse from 'fuse.js'
 import { mapState } from 'vuex'
 import mixin from '../mixin/menu'
+
 export default {
   mixins: [
-    mixin
+    mixin,
   ],
   components: {
-    'd2-panel-search-item': () => import('./components/panel-search-item/index.vue')
+    'd2-panel-search-item': () => import('./components/panel-search-item/index.vue'),
   },
   data () {
     return {
       searchText: '',
-      results: []
+      results: [],
     }
   },
   computed: {
     ...mapState('d2admin/search', [
       'hotkey',
-      'pool'
+      'pool',
     ]),
     // 这份数据是展示在搜索面板下面的
     resultsList () {
       return (this.results.length === 0 && this.searchText === '') ? this.pool.map(e => ({
         value: e.fullTitle,
-        ...e
+        ...e,
       })) : this.results
-    }
+    },
   },
   methods: {
     /**
@@ -94,13 +96,13 @@ export default {
         minMatchCharLength: 1,
         keys: [
           'fullTitle',
-          'path'
-        ]
+          'path',
+        ],
       })
         .search(queryString)
         .map(e => ({
           value: e.fullTitle,
-          ...e
+          ...e,
         }))
     },
     /**
@@ -164,8 +166,8 @@ export default {
       this.closeSuggestion()
       await this.$nextTick()
       this.$emit('close')
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -173,22 +175,27 @@ export default {
 .panel-search {
   margin: 20px;
   width: 100%;
+
   .panel-search__input-group {
     height: 240px;
+
     .panel-search__logo {
       width: 80px;
       height: 80px;
       margin-bottom: 20px;
     }
+
     .panel-search__input {
       width: 500px;
     }
+
     .panel-search__tip {
       @extend %unable-select;
       margin-top: 20px;
       margin-bottom: 40px;
       font-size: 12px;
       color: $color-text-sub;
+
       .panel-search__key {
         padding: 1px 5px;
         margin: 0px 2px;
@@ -198,9 +205,11 @@ export default {
       }
     }
   }
+
   .panel-search__results-group {
     overflow: auto;
     margin-bottom: -20px;
+
     .panel-search__results-group-inner {
       margin: -20px;
     }

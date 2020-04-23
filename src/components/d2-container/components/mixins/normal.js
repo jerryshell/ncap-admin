@@ -8,7 +8,7 @@ function handleMaker (wait) {
   return throttle(e => {
     this.$emit('scroll', {
       x: e.target.scrollLeft,
-      y: e.target.scrollTop
+      y: e.target.scrollTop,
     })
   }, wait)
 }
@@ -19,12 +19,12 @@ export default {
     scrollDelay: {
       type: Number,
       required: false,
-      default: 10
-    }
+      default: 10,
+    },
   },
   data () {
     return {
-      handleScroll: null
+      handleScroll: null,
     }
   },
   watch: {
@@ -35,7 +35,7 @@ export default {
       this.handleScroll = handleMaker.call(this, val)
       // 添加新的监听
       this.addScrollListener()
-    }
+    },
   },
   methods: {
     // 增加滚动事件监听
@@ -62,6 +62,6 @@ export default {
         }
       }
       smoothscroll()
-    }
-  }
+    },
+  },
 }

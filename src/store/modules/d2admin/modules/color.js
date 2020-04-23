@@ -5,7 +5,7 @@ export default {
   namespaced: true,
   state: {
     // 颜色
-    value: process.env.VUE_APP_ELEMENT_COLOR
+    value: process.env.VUE_APP_ELEMENT_COLOR,
   },
   actions: {
     /**
@@ -24,12 +24,12 @@ export default {
           dbName: 'sys',
           path: 'color.value',
           value: state.value,
-          user: true
+          user: true,
         }, { root: true })
         // 应用
         commit('apply', {
           oldColor: old,
-          newColor: state.value
+          newColor: state.value,
         })
         // end
         resolve()
@@ -48,17 +48,17 @@ export default {
           dbName: 'sys',
           path: 'color.value',
           defaultValue: process.env.VUE_APP_ELEMENT_COLOR,
-          user: true
+          user: true,
         }, { root: true })
         // 应用
         commit('apply', {
           oldColor: old,
-          newColor: state.value
+          newColor: state.value,
         })
         // end
         resolve()
       })
-    }
+    },
   },
   mutations: {
     /**
@@ -70,9 +70,9 @@ export default {
     apply (state, { oldColor, newColor }) {
       var options = {
         oldColors: [...forElementUI.getElementUISeries(oldColor)],
-        newColors: [...forElementUI.getElementUISeries(newColor)]
+        newColors: [...forElementUI.getElementUISeries(newColor)],
       }
       client.changer.changeColor(options)
-    }
-  }
+    },
+  },
 }

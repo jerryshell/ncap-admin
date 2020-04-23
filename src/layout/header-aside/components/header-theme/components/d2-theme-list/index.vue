@@ -1,44 +1,46 @@
 <template>
   <el-table :data="list" v-bind="table">
-    <el-table-column prop="title" align="center" width="160"/>
+    <el-table-column align="center" prop="title" width="160"/>
     <el-table-column label="预览" width="120">
-      <div slot-scope="scope" class="theme-preview" :style="{ backgroundImage: `url(${$baseUrl}${scope.row.preview})` }"/>
+      <div :style="{ backgroundImage: `url(${$baseUrl}${scope.row.preview})` }" class="theme-preview"
+           slot-scope="scope"/>
     </el-table-column>
-    <el-table-column prop="address" align="center">
+    <el-table-column align="center" prop="address">
       <template slot-scope="scope">
-        <el-button v-if="activeName === scope.row.name" type="success" icon="el-icon-check" round>已激活</el-button>
-        <el-button v-else round @click="handleSelectTheme(scope.row.name)">使用</el-button>
+        <el-button icon="el-icon-check" round type="success" v-if="activeName === scope.row.name">已激活</el-button>
+        <el-button @click="handleSelectTheme(scope.row.name)" round v-else>使用</el-button>
       </template>
     </el-table-column>
   </el-table>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
+
 export default {
   name: 'd2-theme-list',
   data () {
     return {
       table: {
         showHeader: false,
-        border: true
-      }
+        border: true,
+      },
     }
   },
   computed: {
     ...mapState('d2admin/theme', [
       'list',
-      'activeName'
-    ])
+      'activeName',
+    ]),
   },
   methods: {
     ...mapActions('d2admin/theme', [
-      'set'
+      'set',
     ]),
     handleSelectTheme (name) {
       this.set(name)
-    }
-  }
+    },
+  },
 }
 </script>
 

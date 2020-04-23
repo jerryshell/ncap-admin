@@ -3,10 +3,12 @@
 .fade-transverse-enter-active {
   transition: all .5s;
 }
+
 .fade-transverse-enter {
   opacity: 0;
   transform: translateX(-30px);
 }
+
 .fade-transverse-leave-to {
   opacity: 0;
   transform: translateX(30px);
@@ -17,10 +19,12 @@
 .fade-scale-enter-active {
   transition: all .3s;
 }
+
 .fade-scale-enter {
   opacity: 0;
   transform: scale(1.2);
 }
+
 .fade-scale-leave-to {
   opacity: 0;
   transform: scale(0.8);

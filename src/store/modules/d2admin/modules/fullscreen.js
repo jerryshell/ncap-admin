@@ -4,7 +4,7 @@ export default {
   namespaced: true,
   state: {
     // 全屏激活
-    active: false
+    active: false,
   },
   actions: {
     /**
@@ -34,7 +34,7 @@ export default {
         // end
         resolve()
       })
-    }
+    },
   },
   mutations: {
     /**
@@ -44,6 +44,6 @@ export default {
      */
     set (state, active) {
       state.active = active
-    }
-  }
+    },
+  },
 }

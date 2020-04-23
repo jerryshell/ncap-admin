@@ -7,7 +7,7 @@ export default {
     // 主题
     list: setting.theme.list,
     // 现在激活的主题 这应该是一个名字 不是对象
-    activeName: setting.theme.list[0].name
+    activeName: setting.theme.list[0].name,
   },
   getters: {
     /**
@@ -16,7 +16,7 @@ export default {
      */
     activeSetting (state) {
       return state.list.find(theme => theme.name === state.activeName)
-    }
+    },
   },
   actions: {
     /**
@@ -26,7 +26,9 @@ export default {
     set ({ state, commit, dispatch }, themeName) {
       return new Promise(async resolve => {
         // 检查这个主题在主题列表里是否存在
-        state.activeName = state.list.find(e => e.name === themeName) ? themeName : state.list[0].name
+        state.activeName = state.list.find(e => e.name === themeName)
+          ? themeName
+          : state.list[0].name
         // 将 vuex 中的主题应用到 dom
         commit('dom')
         // 持久化
@@ -34,7 +36,7 @@ export default {
           dbName: 'sys',
           path: 'theme.activeName',
           value: state.activeName,
-          user: true
+          user: true,
         }, { root: true })
         // end
         resolve()
@@ -50,7 +52,7 @@ export default {
           dbName: 'sys',
           path: 'theme.activeName',
           defaultValue: state.list[0].name,
-          user: true
+          user: true,
         }, { root: true })
         // 检查这个主题在主题列表里是否存在
         if (state.list.find(e => e.name === activeName)) {
@@ -62,7 +64,7 @@ export default {
             dbName: 'sys',
             path: 'theme.activeName',
             value: state.activeName,
-            user: true
+            user: true,
           }, { root: true })
         }
         // 将 vuex 中的主题应用到 dom
@@ -70,7 +72,7 @@ export default {
         // end
         resolve()
       })
-    }
+    },
   },
   mutations: {
     /**
@@ -79,6 +81,6 @@ export default {
      */
     dom (state) {
       document.body.className = `theme-${state.activeName}`
-    }
-  }
+    },
+  },
 }

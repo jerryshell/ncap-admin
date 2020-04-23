@@ -5,7 +5,7 @@ import log from './util.log'
 const util = {
   cookies,
   db,
-  log
+  log,
 }
 
 /**

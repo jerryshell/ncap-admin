@@ -14,14 +14,14 @@ export default {
     type: {
       type: String,
       required: false,
-      default: 'full'
+      default: 'full',
     },
     // 滚动优化
     betterScroll: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     // 始终返回渲染组件
@@ -31,28 +31,35 @@ export default {
       if (this.type === 'ghost' && !this.betterScroll) return d2ContainerGhost
       if (this.type === 'ghost' && this.betterScroll) return d2ContainerGhostBs
       if (this.type === 'full' && !this.betterScroll) return d2ContainerFull
-      if (this.type === 'full' && this.betterScroll) return d2ContainerFullBs
-      else {
+      if (this.type === 'full' && this.betterScroll) {
+        return d2ContainerFullBs
+      } else {
         return 'div'
       }
-    }
+    },
   },
   render (h) {
-    const slots = [ this.$slots.default ]
-    if (this.$slots.header) slots.push(h('template', { slot: 'header' }, [ this.$slots.header ]))
-    if (this.$slots.footer) slots.push(h('template', { slot: 'footer' }, [ this.$slots.footer ]))
+    const slots = [this.$slots.default]
+    if (this.$slots.header) {
+      slots.push(
+        h('template', { slot: 'header' }, [this.$slots.header]))
+    }
+    if (this.$slots.footer) {
+      slots.push(
+        h('template', { slot: 'footer' }, [this.$slots.footer]))
+    }
     return h('div', {
       ref: 'container',
-      class: 'container-component'
+      class: 'container-component',
     }, [
       h(this.component, {
         ref: 'component',
         props: this.$attrs,
         on: {
-          scroll: e => this.$emit('scroll', e)
-        }
+          scroll: e => this.$emit('scroll', e),
+        },
       }, slots),
-      h(d2Source)
+      h(d2Source),
     ])
   },
   methods: {

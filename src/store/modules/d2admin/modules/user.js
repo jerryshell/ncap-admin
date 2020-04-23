@@ -2,7 +2,7 @@ export default {
   namespaced: true,
   state: {
     // 用户信息
-    info: {}
+    info: {},
   },
   actions: {
     /**
@@ -19,7 +19,7 @@ export default {
           dbName: 'sys',
           path: 'user.info',
           value: info,
-          user: true
+          user: true,
         }, { root: true })
         // end
         resolve()
@@ -36,11 +36,11 @@ export default {
           dbName: 'sys',
           path: 'user.info',
           defaultValue: {},
-          user: true
+          user: true,
         }, { root: true })
         // end
         resolve()
       })
-    }
-  }
+    },
+  },
 }

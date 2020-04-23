@@ -15,13 +15,13 @@ export default {
      */
     login ({ dispatch }, {
       username = '',
-      password = ''
+      password = '',
     } = {}) {
       return new Promise((resolve, reject) => {
         // 开始请求登录接口
         AccountLogin({
           username,
-          password
+          password,
         })
           .then(async res => {
             // 设置 cookie 一定要存 uuid 和 token 两个 cookie
@@ -33,7 +33,7 @@ export default {
             util.cookies.set('token', res.token)
             // 设置 vuex 用户信息
             await dispatch('d2admin/user/set', {
-              name: res.name
+              name: res.name,
             }, { root: true })
             // 用户登录后从持久化数据加载一系列的设置
             await dispatch('load')
@@ -63,14 +63,15 @@ export default {
         await dispatch('d2admin/user/set', {}, { root: true })
         // 跳转路由
         router.push({
-          name: 'login'
+          name: 'login',
         })
       }
+
       // 判断是否需要确认
       if (confirm) {
         commit('d2admin/gray/set', true, { root: true })
         MessageBox.confirm('确定要注销当前用户吗', '注销用户', {
-          type: 'warning'
+          type: 'warning',
         })
           .then(() => {
             commit('d2admin/gray/set', false, { root: true })
@@ -79,7 +80,7 @@ export default {
           .catch(() => {
             commit('d2admin/gray/set', false, { root: true })
             Message({
-              message: '取消注销操作'
+              message: '取消注销操作',
             })
           })
       } else {
@@ -109,6 +110,6 @@ export default {
         // end
         resolve()
       })
-    }
-  }
+    },
+  },
 }

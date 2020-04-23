@@ -1,16 +1,17 @@
 <template>
-  <div class="d2-layout-header-aside-group" :style="styleLayoutMainGroup" :class="{grayMode: grayActive}">
+  <div :class="{grayMode: grayActive}" :style="styleLayoutMainGroup" class="d2-layout-header-aside-group">
     <!-- 半透明遮罩 -->
     <div class="d2-layout-header-aside-mask"></div>
     <!-- 主体内容 -->
     <div class="d2-layout-header-aside-content" flex="dir:top">
       <!-- 顶栏 -->
-      <div class="d2-theme-header" :style="{ opacity: this.searchActive ? 0.5 : 1 }" flex-box="0" flex>
-        <router-link to="/index" class="logo-group" :style="{width: asideCollapse ? asideWidthCollapse : asideWidth}" flex-box="0">
-          <img v-if="asideCollapse" :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/icon-only.png`">
-          <img v-else :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/all.png`">
+      <div :style="{ opacity: this.searchActive ? 0.5 : 1 }" class="d2-theme-header" flex flex-box="0">
+        <router-link :style="{width: asideCollapse ? asideWidthCollapse : asideWidth}" class="logo-group" flex-box="0"
+                     to="/index">
+          <img :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/icon-only.png`" v-if="asideCollapse">
+          <img :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/all.png`" v-else>
         </router-link>
-        <div class="toggle-aside-btn" @click="handleToggleAside" flex-box="0">
+        <div @click="handleToggleAside" class="toggle-aside-btn" flex-box="0">
           <d2-icon name="bars"/>
         </div>
         <d2-menu-header flex-box="1"/>
@@ -28,22 +29,23 @@
         </div>
       </div>
       <!-- 下面 主体 -->
-      <div class="d2-theme-container" flex-box="1" flex>
+      <div class="d2-theme-container" flex flex-box="1">
         <!-- 主体 侧边栏 -->
-        <div flex-box="0" ref="aside" class="d2-theme-container-aside" :style="{ width: asideCollapse ? asideWidthCollapse : asideWidth, opacity: this.searchActive ? 0.5 : 1 }">
+        <div :style="{ width: asideCollapse ? asideWidthCollapse : asideWidth, opacity: this.searchActive ? 0.5 : 1 }" class="d2-theme-container-aside" flex-box="0"
+             ref="aside">
           <d2-menu-side/>
         </div>
         <!-- 主体 -->
-        <div class="d2-theme-container-main" flex-box="1" flex>
+        <div class="d2-theme-container-main" flex flex-box="1">
           <!-- 搜索 -->
           <transition name="fade-scale">
-            <div v-if="searchActive" class="d2-theme-container-main-layer" flex>
-              <d2-panel-search ref="panelSearch" @close="searchPanelClose"/>
+            <div class="d2-theme-container-main-layer" flex v-if="searchActive">
+              <d2-panel-search @close="searchPanelClose" ref="panelSearch"/>
             </div>
           </transition>
           <!-- 内容 -->
           <transition name="fade-scale">
-            <div v-if="!searchActive" class="d2-theme-container-main-layer" flex="dir:top">
+            <div class="d2-theme-container-main-layer" flex="dir:top" v-if="!searchActive">
               <!-- tab -->
               <div class="d2-theme-container-main-header" flex-box="0">
                 <d2-tabs/>
@@ -76,12 +78,13 @@ import d2HeaderTheme from './components/header-theme'
 import d2HeaderUser from './components/header-user'
 import d2HeaderLog from './components/header-log'
 import d2HeaderColor from './components/header-color'
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import mixinSearch from './mixins/search'
+
 export default {
   name: 'd2-layout-header-aside',
   mixins: [
-    mixinSearch
+    mixinSearch,
   ],
   components: {
     d2MenuSide,
@@ -94,14 +97,14 @@ export default {
     d2HeaderTheme,
     d2HeaderUser,
     d2HeaderLog,
-    d2HeaderColor
+    d2HeaderColor,
   },
   data () {
     return {
       // [侧边栏宽度] 正常状态
       asideWidth: '200px',
       // [侧边栏宽度] 折叠状态
-      asideWidthCollapse: '65px'
+      asideWidthCollapse: '65px',
     }
   },
   computed: {
@@ -109,10 +112,10 @@ export default {
       keepAlive: state => state.page.keepAlive,
       grayActive: state => state.gray.active,
       transitionActive: state => state.transition.active,
-      asideCollapse: state => state.menu.asideCollapse
+      asideCollapse: state => state.menu.asideCollapse,
     }),
     ...mapGetters('d2admin', {
-      themeActiveSetting: 'theme/activeSetting'
+      themeActiveSetting: 'theme/activeSetting',
     }),
     /**
      * @description 最外层容器的背景图片样式
@@ -121,19 +124,19 @@ export default {
       return this.themeActiveSetting.backgroundImage
         ? { backgroundImage: `url('${this.$baseUrl}${this.themeActiveSetting.backgroundImage}')` }
         : {}
-    }
+    },
   },
   methods: {
     ...mapActions('d2admin/menu', [
-      'asideCollapseToggle'
+      'asideCollapseToggle',
     ]),
     /**
      * 接收点击切换侧边栏的按钮
      */
     handleToggleAside () {
       this.asideCollapseToggle()
-    }
-  }
+    },
+  },
 }
 </script>
 

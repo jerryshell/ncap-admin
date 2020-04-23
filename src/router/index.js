@@ -1,13 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
 // 进度条
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 import store from '@/store/index'
 import util from '@/libs/util.js'
-
 // 路由数据
 import routes from './routes'
 
@@ -25,7 +23,7 @@ Vue.use(VueRouter)
 
 // 导出路由 在 main.js 里使用
 const router = new VueRouter({
-  routes
+  routes,
 })
 
 /**
@@ -54,8 +52,8 @@ router.beforeEach(async (to, from, next) => {
       next({
         name: 'login',
         query: {
-          redirect: to.fullPath
-        }
+          redirect: to.fullPath,
+        },
       })
       // https://github.com/d2-projects/d2-admin/issues/138
       NProgress.done()

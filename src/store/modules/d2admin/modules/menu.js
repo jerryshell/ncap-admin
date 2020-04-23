@@ -12,8 +12,8 @@ function supplementMenuPath (menu) {
     ...e,
     path: e.path || uniqueId('d2-menu-empty-'),
     ...e.children ? {
-      children: supplementMenuPath(e.children)
-    } : {}
+      children: supplementMenuPath(e.children),
+    } : {},
   }))
 }
 
@@ -25,7 +25,7 @@ export default {
     // 侧栏菜单
     aside: [],
     // 侧边栏收缩
-    asideCollapse: setting.menu.asideCollapse
+    asideCollapse: setting.menu.asideCollapse,
   },
   actions: {
     /**
@@ -42,7 +42,7 @@ export default {
           dbName: 'sys',
           path: 'menu.asideCollapse',
           value: state.asideCollapse,
-          user: true
+          user: true,
         }, { root: true })
         // end
         resolve()
@@ -61,7 +61,7 @@ export default {
           dbName: 'sys',
           path: 'menu.asideCollapse',
           value: state.asideCollapse,
-          user: true
+          user: true,
         }, { root: true })
         // end
         resolve()
@@ -78,12 +78,12 @@ export default {
           dbName: 'sys',
           path: 'menu.asideCollapse',
           defaultValue: setting.menu.asideCollapse,
-          user: true
+          user: true,
         }, { root: true })
         // end
         resolve()
       })
-    }
+    },
   },
   mutations: {
     /**
@@ -103,6 +103,6 @@ export default {
     asideSet (state, menu) {
       // store 赋值
       state.aside = supplementMenuPath(menu)
-    }
-  }
+    },
+  },
 }

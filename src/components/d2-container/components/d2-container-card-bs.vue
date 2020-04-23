@@ -1,6 +1,6 @@
 <template>
   <div class="d2-container-card-bs">
-    <div v-if="$slots.header" class="d2-container-card-bs__header" ref="header">
+    <div class="d2-container-card-bs__header" ref="header" v-if="$slots.header">
       <slot name="header"/>
     </div>
     <div class="d2-container-card-bs__body" ref="wrapper">
@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <div v-if="$slots.footer" class="d2-container-card-bs__footer" ref="footer">
+    <div class="d2-container-card-bs__footer" ref="footer" v-if="$slots.footer">
       <slot name="footer"/>
     </div>
   </div>
@@ -18,10 +18,11 @@
 
 <script>
 import bs from './mixins/bs'
+
 export default {
   name: 'd2-container-card-bs',
   mixins: [
-    bs
-  ]
+    bs,
+  ],
 }
 </script>
