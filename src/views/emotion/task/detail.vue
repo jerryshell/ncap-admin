@@ -101,6 +101,15 @@
             prop="n">
           </el-table-column>
         </el-table>
+        <el-pagination
+          :current-page="commentPage.pageNum"
+          :page-size="commentPage.pageSize"
+          :total="commentPage.total"
+          @current-change="handlePageNumChange"
+          @next-click="handleNextPage"
+          @prev-click="handlePrevPage"
+          layout="prev, pager, next">
+        </el-pagination>
       </div>
     </el-card>
 
@@ -117,7 +126,15 @@ export default {
       task: {
         id: '',
         newsId: '',
+        newsTitle: '',
         progress: 0,
+        pcount: 0,
+        ncount: 0,
+      },
+      commentPage: {
+        pageNum: 1,
+        pageSize: 10,
+        total: 0,
       },
       commentList: [],
       chartSettings: {
@@ -127,6 +144,7 @@ export default {
         columns: ['label', 'count'],
         rows: [],
       },
+      autoGetTaskByIdInterval: undefined,
     }
   },
   mounted () {
@@ -158,13 +176,31 @@ export default {
       })
     },
     listCommentByNewsId () {
-      commentApi.listByNewsId(this.task.newsId, 1, 30).then(data => {
+      return commentApi.listByNewsId(
+        this.task.newsId,
+        this.commentPage.pageNum,
+        this.commentPage.pageSize,
+      ).then(data => {
         console.log('listCommentByNewsId()', data)
         this.commentList = data.records
+        this.commentPage.total = data.total
+        this.commentPage.pageNum = data.current
       })
     },
     gotoNewsPage () {
       window.open(this.task.newsUrl, '_blank')
+    },
+    handleNextPage () {
+      this.commentPage.pageNum += 1
+      this.listCommentByNewsId()
+    },
+    handlePrevPage () {
+      this.commentPage.pageNum -= 1
+      this.listCommentByNewsId()
+    },
+    handlePageNumChange (newPageNum) {
+      this.commentPage.pageNum = newPageNum
+      this.listCommentByNewsId()
     },
   },
 }
