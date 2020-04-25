@@ -24,7 +24,7 @@
           <el-col :span="24">
             <el-card class="box-card" shadow="always">
               <div class="clearfix" slot="header">
-                <span>任务状态</span>
+                <span>分析进度</span>
               </div>
               <div style="text-align: center">
                 <el-progress :center="true" :percentage="task.progress" type="dashboard"></el-progress>
@@ -82,15 +82,23 @@
       </div>
       <div style="text-align: center">
         <el-table
-          :data="task.commentList"
+          :data="commentList"
           style="width: 100%">
           <el-table-column
             label="评论编号"
-            prop="commentId">
+            prop="id">
           </el-table-column>
           <el-table-column
             label="评论内容"
             prop="content">
+          </el-table-column>
+          <el-table-column
+            label="正面概率"
+            prop="p">
+          </el-table-column>
+          <el-table-column
+            label="负面概率"
+            prop="n">
           </el-table-column>
         </el-table>
       </div>
@@ -101,15 +109,17 @@
 
 <script>
 import taskApi from '../../../api/emotion.task'
+import commentApi from '../../../api/emotion.comment'
 
 export default {
   data () {
     return {
       task: {
         id: '',
-        commentList: [],
+        newsId: '',
         progress: 0,
       },
+      commentList: [],
       chartSettings: {
         roseType: 'radius',
       },
@@ -121,23 +131,36 @@ export default {
   },
   mounted () {
     this.task.id = this.$route.params.id
-    this.getTaskById()
+    this.getTaskById().then(() => {
+      this.listCommentByNewsId()
+    })
+    // 自动刷新数据
     this.autoGetTaskByIdInterval = setInterval(this.getTaskById, 2000)
+  },
+  destroyed () {
+    // 停止自动刷新数据
+    clearInterval(this.autoGetTaskByIdInterval)
   },
   methods: {
     getTaskById () {
-      taskApi.getById(this.task.id).then(data => {
+      return taskApi.getById(this.task.id).then(data => {
         console.log('getTaskById()', data)
         this.task = data
 
+        // 计算负面新闻概率
         this.task.n = this.task.ncount / (this.task.pcount + this.task.ncount) * 100
 
-        this.task.commentList = JSON.parse(data.dataJson)
-        console.log('getTaskById()', this.task)
+        // 更新图表信息
         this.chartData.rows = [
           { 'label': '正面评论计数', 'count': this.task.pcount },
           { 'label': '负面评论计数', 'count': this.task.ncount },
         ]
+      })
+    },
+    listCommentByNewsId () {
+      commentApi.listByNewsId(this.task.newsId, 1, 30).then(data => {
+        console.log('listCommentByNewsId()', data)
+        this.commentList = data.records
       })
     },
     gotoNewsPage () {

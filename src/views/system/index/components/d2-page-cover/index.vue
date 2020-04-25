@@ -3,8 +3,8 @@
     <div class="d2-page-cover__logo">
       <slot/>
     </div>
-    <p class="d2-page-cover__title">负面新闻检测系统 {{$version}}</p>
-    <p class="d2-page-cover__sub-title">AI 赋能 - 舆论监管辅助系统解决方案</p>
+    <p class="d2-page-cover__title">负面新闻检测系统</p>
+    <p class="d2-page-cover__sub-title">AI 赋能 - 大数据舆论监管辅助系统解决方案</p>
   </div>
 </template>
 

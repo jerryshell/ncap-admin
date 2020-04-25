@@ -125,7 +125,12 @@ export default {
   },
   mounted () {
     this.getTaskList()
+    // 自动刷新数据
     this.autoGetTaskListInterval = setInterval(this.getTaskList, 2000)
+  },
+  destroyed () {
+    // 停止自动刷新数据
+    clearInterval(this.autoGetTaskListInterval)
   },
   methods: {
     getTaskList () {
