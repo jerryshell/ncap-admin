@@ -22,4 +22,12 @@ export default {
       method: 'get',
     })
   },
+
+  createAnalyseTask (data) {
+    return request({
+      url: '/task/createAnalyseTask',
+      method: 'post',
+      data,
+    })
+  },
 }

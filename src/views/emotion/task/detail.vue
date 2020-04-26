@@ -1,7 +1,19 @@
 <template>
   <d2-container>
     <template slot="header">
-      <el-button @click="gotoNewsPage" type="primary">查看新闻页面</el-button>
+      <el-switch
+        @change="handleAutoRefreshFlagChange"
+        active-text="开启自动刷新"
+        inactive-text="关闭自动刷新"
+        v-model="autoRefreshFlag">
+      </el-switch>
+      <span style="margin: 20px"></span>
+      <el-button @click="gotoNewsPage" type="primary">
+        查看新闻页面
+      </el-button>
+      <el-button @click="createAnalyseTask" type="success" :disabled="task.status !== 2">
+        重新分析评论情感
+      </el-button>
     </template>
 
     <el-row :gutter="20">
@@ -130,6 +142,7 @@ export default {
         progress: 0,
         pcount: 0,
         ncount: 0,
+        status: 0,
       },
       commentPage: {
         pageNum: 1,
@@ -144,22 +157,27 @@ export default {
         columns: ['label', 'count'],
         rows: [],
       },
-      autoGetTaskByIdInterval: undefined,
+      autoRefreshInterval: undefined,
+      autoRefreshFlag: false,
     }
   },
-  mounted () {
-    this.task.id = this.$route.params.id
-    this.getTaskById().then(() => {
-      this.listCommentByNewsId()
-    })
-    // 自动刷新数据
-    this.autoGetTaskByIdInterval = setInterval(this.getTaskById, 2000)
+  watch: {
+    '$route': 'fetchData',
+  },
+  created () {
+    this.fetchData()
   },
   destroyed () {
-    // 停止自动刷新数据
-    clearInterval(this.autoGetTaskByIdInterval)
+    // 取消自动刷新
+    clearInterval(this.autoRefreshInterval)
   },
   methods: {
+    fetchData () {
+      this.task.id = this.$route.params.id
+      this.getTaskById().then(() => {
+        this.listCommentByNewsId()
+      })
+    },
     getTaskById () {
       return taskApi.getById(this.task.id).then(data => {
         console.log('getTaskById()', data)
@@ -201,6 +219,20 @@ export default {
     handlePageNumChange (newPageNum) {
       this.commentPage.pageNum = newPageNum
       this.listCommentByNewsId()
+    },
+    handleAutoRefreshFlagChange (newFlag) {
+      if (newFlag) {
+        // 自动刷新数据
+        this.autoRefreshInterval = setInterval(this.fetchData, 2000)
+        return
+      }
+      // 取消自动刷新
+      clearInterval(this.autoRefreshInterval)
+    },
+    createAnalyseTask () {
+      taskApi.createAnalyseTask({ taskId: this.task.id }).then(data => {
+        console.log('createAnalyseTask()', data)
+      })
     },
   },
 }
