@@ -14,7 +14,7 @@
       <el-button :disabled="task.status !== 2" @click="createAnalyseTask" type="success">
         重新分析评论情感
       </el-button>
-      <el-button :disabled="task.status !== 2" @click="rebootTask" type="danger">
+      <el-button @click="rebootTask" type="danger">
         重启任务
       </el-button>
     </template>
@@ -149,7 +149,7 @@ export default {
       },
       commentPage: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 4,
         total: 0,
       },
       commentList: [],

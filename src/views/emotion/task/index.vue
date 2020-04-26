@@ -91,10 +91,10 @@
         label-position="top" label-width="100px"
         ref="elForm"
         size="medium">
-        <el-form-item label="新闻网址" prop="newsUrl">
+        <el-form-item label="新闻网址，如：http://dy.163.com/v2/article/detail/FB2G0G4N0512B07B.html" prop="newsUrl">
           <el-input
             clearable
-            placeholder="请输入新闻网址"
+            placeholder="请输入新闻网址，如：http://dy.163.com/v2/article/detail/FB2G0G4N0512B07B.html"
             prefix-icon='el-icon-link'
             show-word-limit
             v-model="newTaskFormData.newsUrl"></el-input>
