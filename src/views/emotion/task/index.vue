@@ -114,6 +114,11 @@ import taskApi from '../../../api/emotion.task'
 export default {
   data () {
     return {
+      taskPage: {
+        pageNum: 1,
+        pageSize: 10,
+        total: 0,
+      },
       taskList: [],
       dialogVisible: false,
       newTaskFormData: {
@@ -144,7 +149,7 @@ export default {
       this.getTaskList()
     },
     getTaskList () {
-      return taskApi.list(0, 10).then(data => {
+      return taskApi.list(this.taskPage.pageNum, this.taskPage.pageSize).then(data => {
         console.log('getTaskList()', data)
         data.records.forEach((v, i, array) => {
           array[i].n = v.ncount / (v.pcount + v.ncount) * 100
@@ -171,6 +176,8 @@ export default {
     },
     handleAutoFetchDataFlagChange (newFlag) {
       if (newFlag) {
+        // 刷新页面数据
+        this.fetchData()
         // 自动刷新数据
         this.autoFetchDataInterval = setInterval(this.fetchData, 2000)
         console.log('autoFetchDataInterval', this.autoFetchDataInterval)

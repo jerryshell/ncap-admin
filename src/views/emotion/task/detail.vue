@@ -222,6 +222,8 @@ export default {
     },
     handleAutoFetchDataFlagChange (newFlag) {
       if (newFlag) {
+        // 刷新页面数据
+        this.fetchData()
         // 自动刷新数据
         this.autoFetchDataInterval = setInterval(this.fetchData, 2000)
         console.log('autoFetchDataInterval', this.autoFetchDataInterval)
@@ -233,6 +235,8 @@ export default {
     createAnalyseTask () {
       taskApi.createAnalyseTask({ taskId: this.task.id }).then(data => {
         console.log('createAnalyseTask()', data)
+        // 刷新页面数据
+        this.fetchData()
       })
     },
   },
