@@ -13,7 +13,8 @@
 
     <el-table
       :data="taskList"
-      style="width: 100%">
+      height="100%"
+      width="100%">
       <el-table-column
         label="任务编号"
         prop="id">

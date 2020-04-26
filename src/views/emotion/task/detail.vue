@@ -14,6 +14,9 @@
       <el-button :disabled="task.status !== 2" @click="createAnalyseTask" type="success">
         重新分析评论情感
       </el-button>
+      <el-button :disabled="task.status !== 2" @click="rebootTask" type="danger">
+        重启任务
+      </el-button>
     </template>
 
     <el-row :gutter="20">
@@ -95,7 +98,7 @@
       <div style="text-align: center">
         <el-table
           :data="commentList"
-          style="width: 100%">
+          height="350">
           <el-table-column
             label="评论编号"
             prop="id">
@@ -235,6 +238,13 @@ export default {
     createAnalyseTask () {
       taskApi.createAnalyseTask({ taskId: this.task.id }).then(data => {
         console.log('createAnalyseTask()', data)
+        // 刷新页面数据
+        this.fetchData()
+      })
+    },
+    rebootTask () {
+      taskApi.rebootTask(this.task.id).then(data => {
+        console.log('rebootTask()', data)
         // 刷新页面数据
         this.fetchData()
       })

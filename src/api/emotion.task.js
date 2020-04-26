@@ -30,4 +30,11 @@ export default {
       data,
     })
   },
+
+  rebootTask (taskId) {
+    return request({
+      url: `/task/rebootTask/${taskId}`,
+      method: 'post',
+    })
+  },
 }
