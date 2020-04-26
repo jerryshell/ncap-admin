@@ -2,16 +2,16 @@
   <d2-container>
     <template slot="header">
       <el-switch
-        @change="handleAutoRefreshFlagChange"
+        @change="handleAutoFetchDataFlagChange"
         active-text="开启自动刷新"
         inactive-text="关闭自动刷新"
-        v-model="autoRefreshFlag">
+        v-model="autoFetchDataFlag">
       </el-switch>
       <span style="margin: 20px"></span>
       <el-button @click="gotoNewsPage" type="primary">
         查看新闻页面
       </el-button>
-      <el-button @click="createAnalyseTask" type="success" :disabled="task.status !== 2">
+      <el-button :disabled="task.status !== 2" @click="createAnalyseTask" type="success">
         重新分析评论情感
       </el-button>
     </template>
@@ -157,8 +157,8 @@ export default {
         columns: ['label', 'count'],
         rows: [],
       },
-      autoRefreshInterval: undefined,
-      autoRefreshFlag: false,
+      autoFetchDataInterval: undefined,
+      autoFetchDataFlag: false,
     }
   },
   watch: {
@@ -167,9 +167,9 @@ export default {
   created () {
     this.fetchData()
   },
-  destroyed () {
+  beforeDestroy () {
     // 取消自动刷新
-    clearInterval(this.autoRefreshInterval)
+    clearInterval(this.autoFetchDataInterval)
   },
   methods: {
     fetchData () {
@@ -220,14 +220,15 @@ export default {
       this.commentPage.pageNum = newPageNum
       this.listCommentByNewsId()
     },
-    handleAutoRefreshFlagChange (newFlag) {
+    handleAutoFetchDataFlagChange (newFlag) {
       if (newFlag) {
         // 自动刷新数据
-        this.autoRefreshInterval = setInterval(this.fetchData, 2000)
+        this.autoFetchDataInterval = setInterval(this.fetchData, 2000)
+        console.log('autoFetchDataInterval', this.autoFetchDataInterval)
         return
       }
       // 取消自动刷新
-      clearInterval(this.autoRefreshInterval)
+      clearInterval(this.autoFetchDataInterval)
     },
     createAnalyseTask () {
       taskApi.createAnalyseTask({ taskId: this.task.id }).then(data => {

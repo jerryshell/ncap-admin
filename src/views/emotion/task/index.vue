@@ -1,6 +1,13 @@
 <template>
   <d2-container>
     <template slot="header">
+      <el-switch
+        @change="handleAutoFetchDataFlagChange"
+        active-text="开启自动刷新"
+        inactive-text="关闭自动刷新"
+        v-model="autoFetchDataFlag">
+      </el-switch>
+      <span style="margin: 20px"></span>
       <el-button @click="dialogVisible = true" type="primary">创建任务</el-button>
     </template>
 
@@ -121,20 +128,23 @@ export default {
           },
         ],
       },
+      autoFetchDataInterval: undefined,
+      autoFetchDataFlag: false,
     }
   },
-  mounted () {
-    this.getTaskList()
-    // 自动刷新数据
-    this.autoGetTaskListInterval = setInterval(this.getTaskList, 2000)
+  created () {
+    this.fetchData()
   },
-  destroyed () {
-    // 停止自动刷新数据
-    clearInterval(this.autoGetTaskListInterval)
+  beforeDestroy () {
+    // 取消自动刷新
+    clearInterval(this.autoFetchDataInterval)
   },
   methods: {
+    fetchData () {
+      this.getTaskList()
+    },
     getTaskList () {
-      taskApi.list(0, 10).then(data => {
+      return taskApi.list(0, 10).then(data => {
         console.log('getTaskList()', data)
         data.records.forEach((v, i, array) => {
           array[i].n = v.ncount / (v.pcount + v.ncount) * 100
@@ -144,7 +154,6 @@ export default {
     },
     handleDetail (index, row) {
       const id = row.id
-      console.log(id)
       this.$router.push({ path: '/task/' + id })
     },
     handleCreateTask () {
@@ -159,6 +168,16 @@ export default {
           this.newTaskFormData.newsUrl = ''
         })
       })
+    },
+    handleAutoFetchDataFlagChange (newFlag) {
+      if (newFlag) {
+        // 自动刷新数据
+        this.autoFetchDataInterval = setInterval(this.fetchData, 2000)
+        console.log('autoFetchDataInterval', this.autoFetchDataInterval)
+        return
+      }
+      // 取消自动刷新
+      clearInterval(this.autoFetchDataInterval)
     },
   },
 }
