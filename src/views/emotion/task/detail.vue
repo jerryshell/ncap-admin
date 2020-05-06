@@ -24,7 +24,7 @@
 
         <el-row :gutter="20">
           <el-col :span="24">
-            <el-card class="box-card" shadow="always">
+            <el-card class="box-card" shadow="hover">
               <div class="clearfix" slot="header">
                 <span>新闻标题</span>
               </div>
@@ -37,7 +37,7 @@
 
         <el-row :gutter="20" style="margin-top: 20px">
           <el-col :span="24">
-            <el-card class="box-card" shadow="always">
+            <el-card class="box-card" shadow="hover">
               <div class="clearfix" slot="header">
                 <span>分析进度</span>
               </div>
@@ -50,7 +50,7 @@
 
         <el-row :gutter="20" style="margin-top: 20px">
           <el-col :span="12">
-            <el-card class="box-card" shadow="always">
+            <el-card class="box-card" shadow="hover">
               <div class="clearfix" slot="header">
                 <span>任务状态</span>
               </div>
@@ -62,7 +62,7 @@
             </el-card>
           </el-col>
           <el-col :span="12">
-            <el-card class="box-card" shadow="always">
+            <el-card class="box-card" shadow="hover">
               <div class="clearfix" slot="header">
                 <span>疑似为负面新闻</span>
               </div>
@@ -80,7 +80,7 @@
 
       </el-col>
       <el-col :span="12">
-        <el-card class="box-card" shadow="always">
+        <el-card class="box-card" shadow="hover">
           <div class="clearfix" slot="header">
             <span>评论统计</span>
           </div>
@@ -91,7 +91,7 @@
       </el-col>
     </el-row>
 
-    <el-card class="box-card" shadow="always" style="margin-top: 20px">
+    <el-card class="box-card" shadow="hover" style="margin-top: 20px">
       <div class="clearfix" slot="header">
         <span>评论列表</span>
       </div>

@@ -21,6 +21,17 @@ const frameIn = [
         },
         component: _import('system/index'),
       },
+      // 系统信息
+      {
+        path: 'info',
+        name: 'info',
+        meta: {
+          title: '系统信息',
+          auth: true,
+        },
+        component: _import('emotion/info'),
+      },
+      // 任务管理
       {
         path: 'task',
         name: 'task',

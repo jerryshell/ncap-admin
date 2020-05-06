@@ -17,10 +17,12 @@ function supplementPath (menu) {
 
 export const menuHeader = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
+  { path: '/info', title: '系统信息', icon: 'cloud' },
   { path: '/task', title: '任务管理', icon: 'tasks' },
 ])
 
 export const menuAside = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
+  { path: '/info', title: '系统信息', icon: 'cloud' },
   { path: '/task', title: '任务管理', icon: 'tasks' },
 ])
