@@ -50,6 +50,16 @@ const frameIn = [
         },
         component: _import('emotion/task/detail'),
       },
+      // 模型管理
+      {
+        path: 'model',
+        name: 'model',
+        meta: {
+          title: '模型管理',
+          auth: true,
+        },
+        component: _import('emotion/model'),
+      },
       // 系统 前端日志
       {
         path: 'log',
