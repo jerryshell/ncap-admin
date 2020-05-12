@@ -15,9 +15,33 @@
           <div class="clearfix" slot="header">
             <span>情感分析系统</span>
           </div>
-          <span>状态：</span>
-          <el-tag type="success" v-if="info.analyseServer.ok">上线</el-tag>
-          <el-tag type="danger" v-if="!info.analyseServer.ok">离线</el-tag>
+          <p>
+            状态：
+            <el-tag type="success" v-if="info.analyseServer.ok">上线</el-tag>
+            <el-tag type="danger" v-if="!info.analyseServer.ok">离线</el-tag>
+          </p>
+          <div v-if="info.analyseServer.ok">
+            <p>
+              1 分钟系统负载：
+              <el-tag>{{info.analyseServer.loadavg.loadavg_1}}</el-tag>
+            </p>
+            <p>
+              5 分钟系统负载：
+              <el-tag>{{info.analyseServer.loadavg.loadavg_5}}</el-tag>
+            </p>
+            <p>
+              15 分钟系统负载：
+              <el-tag>{{info.analyseServer.loadavg.loadavg_15}}</el-tag>
+            </p>
+            <p>
+              内存：
+              <el-tag>{{info.analyseServer.meminfo.MemTotal}}</el-tag>
+            </p>
+            <p>
+              剩余内存：
+              <el-tag>{{info.analyseServer.meminfo.MemFree}}</el-tag>
+            </p>
+          </div>
         </el-card>
       </el-col>
       <el-col :span="12">
@@ -25,9 +49,33 @@
           <div class="clearfix" slot="header">
             <span>评论采集系统</span>
           </div>
-          <span>状态：</span>
-          <el-tag type="success" v-if="info.spiderServer.ok">上线</el-tag>
-          <el-tag type="danger" v-if="!info.spiderServer.ok">离线</el-tag>
+          <p>
+            状态：
+            <el-tag type="success" v-if="info.spiderServer.ok">上线</el-tag>
+            <el-tag type="danger" v-if="!info.spiderServer.ok">离线</el-tag>
+          </p>
+          <div v-if="info.spiderServer.ok">
+            <p>
+              1 分钟系统负载：
+              <el-tag>{{info.spiderServer.loadavg.loadavg_1}}</el-tag>
+            </p>
+            <p>
+              5 分钟系统负载：
+              <el-tag>{{info.spiderServer.loadavg.loadavg_5}}</el-tag>
+            </p>
+            <p>
+              15 分钟系统负载：
+              <el-tag>{{info.spiderServer.loadavg.loadavg_15}}</el-tag>
+            </p>
+            <p>
+              内存：
+              <el-tag>{{info.spiderServer.meminfo.MemTotal}}</el-tag>
+            </p>
+            <p>
+              剩余内存：
+              <el-tag>{{info.spiderServer.meminfo.MemFree}}</el-tag>
+            </p>
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -44,9 +92,27 @@ export default {
       info: {
         analyseServer: {
           ok: false,
+          loadavg: {
+            loadavg_1: '',
+            loadavg_5: '',
+            loadavg_15: '',
+          },
+          meminfo: {
+            MemTotal: '',
+            MemFree: '',
+          },
         },
         spiderServer: {
           ok: false,
+          loadavg: {
+            loadavg_1: '',
+            loadavg_5: '',
+            loadavg_15: '',
+          },
+          meminfo: {
+            MemTotal: '',
+            MemFree: '',
+          },
         },
       },
       autoFetchDataInterval: undefined,
