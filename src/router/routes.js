@@ -31,6 +31,16 @@ const frameIn = [
         },
         component: _import('emotion/info'),
       },
+      // 今日新闻
+      {
+        path: 'news',
+        name: 'news',
+        meta: {
+          title: '今日新闻',
+          auth: true,
+        },
+        component: _import('emotion/news'),
+      },
       // 任务管理
       {
         path: 'task',
