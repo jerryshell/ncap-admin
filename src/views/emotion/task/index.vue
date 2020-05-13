@@ -61,6 +61,9 @@
           <el-tag type="info" v-if="scope.row.n < 50">
             否
           </el-tag>
+          <el-tag type="warning" v-if="!scope.row.n">
+            未知
+          </el-tag>
         </template>
       </el-table-column>
       <el-table-column

@@ -73,6 +73,9 @@
                 <el-tag type="info" v-if="task.n < 50">
                   否
                 </el-tag>
+                <el-tag type="warning" v-if="!task.n">
+                  未知
+                </el-tag>
               </div>
             </el-card>
           </el-col>
