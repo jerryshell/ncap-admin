@@ -5,6 +5,9 @@
 
       <el-col :span="12">
         <el-card shadow="hover">
+          <div class="clearfix" slot="header">
+            <span>更新模型</span>
+          </div>
           <el-form :model="modelUpdateFormData" :rules="rules" label-position="top" label-width="100px"
                    ref="modelUpdateForm"
                    size="medium">
@@ -19,7 +22,12 @@
               <el-switch active-text="开启" inactive-text="关闭" v-model="modelUpdateFormData.realTimeTuning"></el-switch>
             </el-form-item>
             <el-form-item size="large">
-              <el-button @click="submitForm" type="primary">提交</el-button>
+              <el-button
+                @click="submitForm"
+                type="primary"
+                v-loading.fullscreen.lock="fullscreenLoading">
+                提交
+              </el-button>
               <el-button @click="resetForm">重置</el-button>
             </el-form-item>
           </el-form>
@@ -54,6 +62,9 @@
 </template>
 
 <script>
+import modelApi from '../../../api/emotion.model'
+import infoApi from '../../../api/emotion.info'
+
 export default {
   components: {},
   props: [],
@@ -85,22 +96,58 @@ export default {
       ],
       // 模型信息
       modelInfo: {
-        name: 'text_cnn.2.80.h5',
-        realTimeTuning: true,
+        name: '未知',
+        realTimeTuning: false,
         useCountSinceLaunch: 100,
       },
+      modelFilenameList: [],
+      fullscreenLoading: false,
     }
   },
   computed: {},
   watch: {},
   created () {},
-  mounted () {},
+  mounted () {
+    this.fetchData()
+  },
   methods: {
+    fetchData () {
+      this.listModelFilename().then(() => {
+        return this.getModelInfo()
+      })
+    },
+    listModelFilename () {
+      return modelApi.listModelFilename().then(response => {
+        console.log('listModelFilename', response)
+        this.modelFilenameList = response
+        this.modelFilenameOptions = []
+        this.modelFilenameList.forEach(value => {
+          this.modelFilenameOptions.push({
+            value,
+            label: value,
+          })
+        })
+      })
+    },
+    getModelInfo () {
+      return infoApi.getInfo().then(response => {
+        console.log('getModelInfo()', response)
+        this.modelInfo.name = response.analyseServer.model_filename
+        this.modelInfo.realTimeTuning = response.analyseServer.train_status.real_time_tuning
+        this.modelUpdateFormData.realTimeTuning = this.modelInfo.realTimeTuning
+      })
+    },
     submitForm () {
       this.$refs['modelUpdateForm'].validate(valid => {
         if (!valid) return
-        // TODO 提交表单
-        console.log('ok')
+        // 提交表单
+        console.log(this.modelUpdateFormData)
+        this.fullscreenLoading = true
+        modelApi.updateModel(this.modelUpdateFormData).then(response => {
+          console.log('updateModel()', response)
+          this.fetchData()
+          this.fullscreenLoading = false
+        })
       })
     },
     resetForm () {
