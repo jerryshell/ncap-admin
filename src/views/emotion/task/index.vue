@@ -84,6 +84,16 @@
       </el-table-column>
     </el-table>
 
+    <el-pagination
+      :current-page="taskPage.pageNum"
+      :page-size="taskPage.pageSize"
+      :total="taskPage.total"
+      @current-change="handlePageNumChange"
+      @next-click="handleNextPage"
+      @prev-click="handlePrevPage"
+      layout="prev, pager, next">
+    </el-pagination>
+
     <el-dialog
       :visible.sync="dialogVisible"
       @close="dialogVisible = false"
@@ -159,6 +169,8 @@ export default {
           array[i].n = v.ncount / (v.pcount + v.ncount) * 100
         })
         this.taskList = data.records
+        this.taskPage.total = data.total
+        this.taskPage.pageNum = data.current
       })
     },
     handleDetail (index, row) {
@@ -177,6 +189,18 @@ export default {
           this.newTaskFormData.newsUrl = ''
         })
       })
+    },
+    handleNextPage () {
+      this.taskPage.pageNum += 1
+      this.fetchData()
+    },
+    handlePrevPage () {
+      this.taskPage.pageNum -= 1
+      this.fetchData()
+    },
+    handlePageNumChange (newPageNum) {
+      this.taskPage.pageNum = newPageNum
+      this.fetchData()
     },
     handleAutoFetchDataFlagChange (newFlag) {
       if (newFlag) {
