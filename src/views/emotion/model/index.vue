@@ -58,15 +58,24 @@
 
     </el-row>
 
+    <div style="margin: 20px"></div>
+
+    <el-row>
+      <el-col>
+        <model-test></model-test>
+      </el-col>
+    </el-row>
+
   </d2-container>
 </template>
 
 <script>
 import modelApi from '../../../api/emotion.model'
 import infoApi from '../../../api/emotion.info'
+import ModelTest from '@/components/emotion/model-test'
 
 export default {
-  components: {},
+  components: { ModelTest },
   props: [],
   data () {
     return {

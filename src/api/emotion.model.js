@@ -15,4 +15,12 @@ export default {
       data,
     })
   },
+
+  testModel (data) {
+    return request({
+      url: `/model/test`,
+      method: `post`,
+      data,
+    })
+  },
 }
