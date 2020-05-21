@@ -11,7 +11,7 @@
       <el-button @click="gotoNewsPage" type="primary">
         查看新闻页面
       </el-button>
-      <el-button :disabled="task.status !== 2" @click="createAnalyseTask" type="success">
+      <el-button @click="createAnalyseTask" type="success">
         重新分析评论情感
       </el-button>
       <el-button @click="rebootTask" type="danger">
