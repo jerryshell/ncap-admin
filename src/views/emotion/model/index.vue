@@ -143,6 +143,7 @@ export default {
         console.log('getModelInfo()', response)
         this.modelInfo.name = response.analyseServer.model_filename
         this.modelInfo.realTimeTuning = response.analyseServer.train_status.real_time_tuning
+        this.modelInfo.useCountSinceLaunch = response.analyseServer.use_count
         this.modelUpdateFormData.realTimeTuning = this.modelInfo.realTimeTuning
       })
     },
