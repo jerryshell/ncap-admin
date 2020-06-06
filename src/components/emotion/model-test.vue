@@ -6,14 +6,14 @@
 
     <el-row>
       <el-col :span="12">
-        <el-form ref="modelTestForm" :model="modelTestFormData" :rules="modelTestFormRules" size="medium"
-                 label-width="100px" label-position="top">
+        <el-form :model="modelTestFormData" :rules="modelTestFormRules" label-position="top" label-width="100px"
+                 ref="modelTestForm" size="medium">
           <el-form-item label="测试句子" prop="sentence">
-            <el-input v-model="modelTestFormData.sentence" placeholder="请输入测试句子" clearable :style="{width: '100%'}">
+            <el-input :style="{width: '100%'}" clearable placeholder="请输入测试句子" v-model="modelTestFormData.sentence">
             </el-input>
           </el-form-item>
           <el-form-item size="large">
-            <el-button type="primary" @click="submitForm">提交</el-button>
+            <el-button @click="submitForm" type="primary">提交</el-button>
             <el-button @click="resetForm">重置</el-button>
           </el-form-item>
         </el-form>
