@@ -55,10 +55,10 @@
       <el-table-column
         label="疑似负面新闻">
         <template slot-scope="scope">
-          <el-tag type="danger" v-if="scope.row.n >= 50">
+          <el-tag type="danger" v-if="scope.row.n && scope.row.n > 50">
             是
           </el-tag>
-          <el-tag type="info" v-if="scope.row.n < 50">
+          <el-tag type="info" v-if="scope.row.n && scope.row.n <= 50">
             否
           </el-tag>
           <el-tag type="warning" v-if="!scope.row.n">

@@ -18,7 +18,7 @@
                            :value="item.value" v-for="(item, index) in modelFilenameOptions"></el-option>
               </el-select>
             </el-form-item>
-<!--            <el-form-item label="实时调参特性" prop="realTimeTuning" required>-->
+            <!--            <el-form-item label="实时调参特性" prop="realTimeTuning" required>-->
             <!--              <el-switch active-text="开启" inactive-text="关闭" v-model="modelUpdateFormData.realTimeTuning"></el-switch>-->
             <!--            </el-form-item>-->
             <el-form-item size="large">
@@ -44,11 +44,11 @@
             <span>模型名称：</span>
             <el-tag>{{modelInfo.name}}</el-tag>
           </p>
-<!--          <p>-->
-<!--            <span>实时调参特性：</span>-->
-<!--            <el-tag type="success" v-if="modelInfo.realTimeTuning">开启</el-tag>-->
-<!--            <el-tag type="danger" v-if="!modelInfo.realTimeTuning">关闭</el-tag>-->
-<!--          </p>-->
+          <!--          <p>-->
+          <!--            <span>实时调参特性：</span>-->
+          <!--            <el-tag type="success" v-if="modelInfo.realTimeTuning">开启</el-tag>-->
+          <!--            <el-tag type="danger" v-if="!modelInfo.realTimeTuning">关闭</el-tag>-->
+          <!--          </p>-->
           <p>
             <span>自启动以来的使用次数：</span>
             <el-tag>{{modelInfo.useCountSinceLaunch}}</el-tag>

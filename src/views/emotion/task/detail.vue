@@ -67,10 +67,10 @@
                 <span>疑似为负面新闻</span>
               </div>
               <div style="text-align: center">
-                <el-tag type="danger" v-if="task.n >= 50">
+                <el-tag type="danger" v-if="task.n && task.n > 50">
                   是
                 </el-tag>
-                <el-tag type="info" v-if="task.n < 50">
+                <el-tag type="info" v-if="task.n && task.n <= 50">
                   否
                 </el-tag>
                 <el-tag type="warning" v-if="!task.n">
