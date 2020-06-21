@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import infoApi from '../../../api/emotion.info'
+import infoApi from '../../../api/ncap.info'
 
 export default {
   data () {
