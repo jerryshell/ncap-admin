@@ -10,6 +10,24 @@
 * [新闻评论分析平台情感分析模块](https://github.com/jerryshell/ncap-model)
 * [新闻评论分析平台数据采集模块](https://github.com/jerryshell/ncap-spider)
 
+## 项目初始化
+
+```bash
+npm install
+```
+
+## 项目运行
+
+```bash
+npm run serve
+```
+
+## 项目编译
+
+```bash
+npm run build
+```
+
 ## Screenshot
 
 ### 首页
