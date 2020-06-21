@@ -70,9 +70,9 @@
 </template>
 
 <script>
-import modelApi from '../../../api/emotion.model'
-import infoApi from '../../../api/emotion.info'
-import ModelTest from '@/components/emotion/model-test'
+import modelApi from '../../../api/ncap.model'
+import infoApi from '../../../api/ncap.info'
+import ModelTest from '@/components/ncap/model-test'
 
 export default {
   components: { ModelTest },

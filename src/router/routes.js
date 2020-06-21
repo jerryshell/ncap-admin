@@ -29,7 +29,7 @@ const frameIn = [
           title: '系统信息',
           auth: true,
         },
-        component: _import('emotion/info'),
+        component: _import('ncap/info'),
       },
       // 今日新闻
       {
@@ -39,7 +39,7 @@ const frameIn = [
           title: '今日新闻',
           auth: true,
         },
-        component: _import('emotion/news'),
+        component: _import('ncap/news'),
       },
       // 任务管理
       {
@@ -49,7 +49,7 @@ const frameIn = [
           title: '任务管理',
           auth: true,
         },
-        component: _import('emotion/task'),
+        component: _import('ncap/task'),
       },
       {
         path: 'task/:id',
@@ -58,7 +58,7 @@ const frameIn = [
           title: '任务详情',
           auth: true,
         },
-        component: _import('emotion/task/detail'),
+        component: _import('ncap/task/detail'),
       },
       // 模型管理
       {
@@ -68,7 +68,7 @@ const frameIn = [
           title: '模型管理',
           auth: true,
         },
-        component: _import('emotion/model'),
+        component: _import('ncap/model'),
       },
       // 系统 前端日志
       {

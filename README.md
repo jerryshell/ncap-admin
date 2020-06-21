@@ -1,22 +1,45 @@
-[D2Admin](https://github.com/d2-projects/d2-admin) is a fully open source and free enterprise back-end product front-end integration solution, using the latest front-end technology stack, javascript files loading of local first screen less than 60kb, has prepared most of the project preparations, and with a lot of sample code to help the management system agile development.
+# 新闻评论分析平台 Web 端
 
-[中文](https://github.com/d2-projects/d2-admin-start-kit/blob/master/README.zh.md) | **English**
+![](screenshot/system.jpg)
 
-## Preview
+## 相关项目
 
-![Deploy preview](https://github.com/d2-projects/d2-admin-start-kit/workflows/Deploy%20preview/badge.svg)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/08ff8c93-f0a8-497a-a081-440b31fb3aa4/deploy-status)](https://app.netlify.com/sites/d2-admin-start-kit/deploys)
+* 新闻评论分析平台 Web 端（当前项目）
+* [新闻评论分析平台数据大屏](https://github.com/jerryshell/ncap-datav)
+* [新闻评论分析平台服务端](https://github.com/jerryshell/ncap-server)
+* [新闻评论分析平台情感分析模块](https://github.com/jerryshell/ncap-model)
+* [新闻评论分析平台数据采集模块](https://github.com/jerryshell/ncap-spider)
 
-| server | link | server |
-| --- | --- | --- |
-| d2.pub | [d2.pub/d2-admin-start-kit/preview](https://d2.pub/d2-admin-start-kit/preview) | China server |
-| cdn.d2.pub | [cdn.d2.pub/d2-admin-start-kit/preview](https://cdn.d2.pub/d2-admin-start-kit/preview) | qiniu CDN |
-| github | [d2-projects.github.io/d2-admin-start-kit](https://d2-projects.github.io/d2-admin-start-kit) | GitHub pages |
-| netlify | [d2-admin-start-kit.netlify.com](https://d2-admin-start-kit.netlify.com) | Netlify CDN |
+## Screenshot
 
-## Other synchronous repositories
+### 首页
 
-| type | link |
-| --- | --- |
-| gitee | [https://gitee.com/fairyever/d2-admin](https://gitee.com/fairyever/d2-admin) |
-| coding | [https://d2-projects.coding.net/p/d2-projects/d/d2-admin/git](https://d2-projects.coding.net/p/d2-projects/d/d2-admin/git) |
+![](screenshot/index.png)
+
+### 系统信息
+
+![](screenshot/info-index.png)
+
+### 今日新闻
+
+![](screenshot/news-index.png)
+
+### 任务管理
+
+![](screenshot/task-index.png)
+
+### 任务详情
+
+![](screenshot/task-detail-1.png)
+
+### 任务详情 - 评论列表
+
+![](screenshot/task-detail-2.png)
+
+### 模型管理
+
+![](screenshot/model-index.png)
+
+## 感谢
+
+* [D2Admin](https://github.com/d2-projects/d2-admin)

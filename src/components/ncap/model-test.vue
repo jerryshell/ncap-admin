@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import modelApi from '@/api/emotion.model'
+import modelApi from '@/api/ncap.model'
 
 export default {
   components: {},

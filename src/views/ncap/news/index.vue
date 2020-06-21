@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import newsApi from '../../../api/emotion.news'
-import taskApi from '../../../api/emotion.task'
+import newsApi from '../../../api/ncap.news'
+import taskApi from '../../../api/ncap.task'
 
 export default {
   data () {

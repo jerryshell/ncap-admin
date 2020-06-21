@@ -135,8 +135,8 @@
 </template>
 
 <script>
-import taskApi from '../../../api/emotion.task'
-import commentApi from '../../../api/emotion.comment'
+import taskApi from '../../../api/ncap.task'
+import commentApi from '../../../api/ncap.comment'
 
 export default {
   data () {

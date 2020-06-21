@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import taskApi from '../../../api/emotion.task'
+import taskApi from '../../../api/ncap.task'
 
 export default {
   data () {
